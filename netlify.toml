@@ -1,0 +1,33 @@
+In Netlify, the CI (Continuous Integration) environment variable is typically set to true by default during builds. This lets your code and scripts know they are running in a CI/CD environment.
+Should you set CI to true or false?
+•	CI=true (default):
+o	Netlify sets this automatically.
+o	Useful for tools like test runners (e.g., Jest), linters, or build tools that behave differently in a CI environment.
+o	Ensures consistent and automated builds.
+•	CI=false:
+o	You might set this manually if you want tools to behave as if they’re running locally (e.g., allowing interactive prompts or looser error handling).
+o	Not recommended in most production workflows, because it can cause inconsistent or unsafe builds.
+
+A netlify.toml file is used to configure your Netlify deployment. If you're deploying a simple static site built with just HTML and CSS (no frameworks like React, Vue, etc.), you only need a minimal configuration.
+Here’s a basic example of a netlify.toml file for an HTML/CSS static site:
+[build]
+  publish = "public" # Replace "public" with the folder that contains your index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+Key Notes:
+•	publish = "public": This should point to the folder that contains your index.html file. Common options include public, dist, or just . (for the root directory).
+•	The redirect rule is optional, but it ensures that all routes fallback to index.html, which is useful if you have JavaScript-based navigation or want to handle 404s nicely.
+
+my-site/
+├── index.html
+├── styles.css
+├── netlify.toml
+In this case, your netlify.toml file would look like:
+[build]
+  publish = "."  # Current directory
+
+
+
